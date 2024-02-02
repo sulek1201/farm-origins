@@ -13,7 +13,7 @@ public interface UserService {
 
     Boolean register(RegistrationRequest registrationRequest);
 
-    User findByUserName(String userName);
+    User findByEmail(String userName);
 
 
 }

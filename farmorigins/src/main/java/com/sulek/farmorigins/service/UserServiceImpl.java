@@ -3,6 +3,7 @@ package com.sulek.farmorigins.service;
 
 import com.sulek.farmorigins.dto.RegistrationRequest;
 import com.sulek.farmorigins.entity.User;
+import com.sulek.farmorigins.exception.DuplicateKeyValueException;
 import com.sulek.farmorigins.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -27,10 +28,11 @@ public class UserServiceImpl implements UserService {
         try {
             User user = User.builder()
                     .email(registrationRequest.getEmail())
-                    .nameSurname(registrationRequest.getNameSurname())
                     .password(bCryptPasswordEncoder.encode(registrationRequest.getPassword()))
-                    .username(registrationRequest.getUsername())
-                    .address(registrationRequest.getAddress())
+                    .firstName(registrationRequest.getFirstName())
+                    .lastName(registrationRequest.getLastName())
+                    .phoneNumber(registrationRequest.getPhoneNumber())
+                    .userRole(registrationRequest.getUserRole())
                     .emailActivision(false)
                     .build();
             user.setStatus(true);
@@ -38,15 +40,15 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user);
             return Boolean.TRUE;
         } catch (DataIntegrityViolationException ex) {
-            return null;
+            throw new DuplicateKeyValueException(ex.getMessage());
         } catch (Exception e) {
             return Boolean.FALSE;
         }
     }
 
     @Override
-    public User findByUserName(String userName) {
-        User user = userRepository.findByUsername(userName);
+    public User findByEmail(String email) {
+        User user = userRepository.findByEmail(email);
         if (user == null) {
         }
         return user;

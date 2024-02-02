@@ -30,10 +30,10 @@ public class AccountController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<TokenResponse> login(@RequestBody LoginRequest request) throws AuthenticationException {
-        User user = userService.findByUserName(request.getUsername());
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), request.getPassword()));
+        User user = userService.findByEmail(request.getEmail());
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), request.getPassword()));
         final String token = jwtTokenUtil.generateToken(user);
-        return ResponseEntity.ok(new TokenResponse(user.getUsername(), token));
+        return ResponseEntity.ok(new TokenResponse(user.getEmail(), token, user.getUserRole()));
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
