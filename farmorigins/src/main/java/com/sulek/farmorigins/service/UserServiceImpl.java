@@ -3,6 +3,7 @@ package com.sulek.farmorigins.service;
 
 import com.sulek.farmorigins.dto.RegistrationRequest;
 import com.sulek.farmorigins.entity.User;
+import com.sulek.farmorigins.exception.CustomerNotFoundException;
 import com.sulek.farmorigins.exception.DuplicateKeyValueException;
 import com.sulek.farmorigins.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,7 @@ public class UserServiceImpl implements UserService {
     public User findByEmail(String email) {
         User user = userRepository.findByEmail(email);
         if (user == null) {
+            throw new CustomerNotFoundException("user not found");
         }
         return user;
     }
