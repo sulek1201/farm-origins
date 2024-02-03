@@ -72,7 +72,7 @@ public class JwtTokenUtil {
                         && !isTokenExpired(token));
     }
 
-    public static String parseUserNameFromJwt(String jwt) {
+    public static String parseUserEmailFromJwt(String jwt) {
 
         Jws<Claims> parsedToken = Jwts.parser()
                 .setSigningKey(SIGNING_KEY)
