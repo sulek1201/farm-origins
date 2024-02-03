@@ -4,17 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TokenResponse {
+public class UserSummaryResponse {
     private String email;
-    private String accessToken;
     private Integer userRole;
-    private Date expiredAt;
     private Long userId;
     private String userName;
 }

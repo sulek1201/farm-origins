@@ -3,6 +3,7 @@ package com.sulek.farmorigins.controller;
 import com.sulek.farmorigins.dto.LoginRequest;
 import com.sulek.farmorigins.dto.RegistrationRequest;
 import com.sulek.farmorigins.dto.TokenResponse;
+import com.sulek.farmorigins.dto.UserSummaryResponse;
 import com.sulek.farmorigins.entity.User;
 import com.sulek.farmorigins.security.JwtTokenUtil;
 import com.sulek.farmorigins.service.UserServiceImpl;
@@ -33,12 +34,23 @@ public class AccountController {
         User user = userService.findByEmail(request.getEmail());
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), request.getPassword()));
         final String token = jwtTokenUtil.generateToken(user);
-        return ResponseEntity.ok(new TokenResponse(user.getEmail(), token, user.getUserRole()));
+        return ResponseEntity.ok(new TokenResponse(user.getEmail(), token, user.getUserRole(), jwtTokenUtil.getExpirationDateFromToken(token), user.getId(), user.getFirstName().concat(" ").concat(user.getLastName())));
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<Boolean> register(@RequestBody RegistrationRequest registrationRequest) throws AuthenticationException {
         Boolean response = userService.register(registrationRequest);
         return ResponseEntity.ok(response);
+    }
+
+    @RequestMapping(value = "/user-summary", method = RequestMethod.POST)
+    public ResponseEntity<UserSummaryResponse> userSummary(@RequestHeader("Authorization") String jwtToken) throws AuthenticationException {
+        User user = getUser(jwtToken);
+        return ResponseEntity.ok(new UserSummaryResponse(user.getEmail(), user.getUserRole(), user.getId(),user.getFirstName().concat(" ").concat(user.getLastName())));
+    }
+
+    private User getUser(String jwtToken) {
+        String email = JwtTokenUtil.parseUserEmailFromJwt(jwtToken);
+        return userService.findByEmail(email);
     }
 }
