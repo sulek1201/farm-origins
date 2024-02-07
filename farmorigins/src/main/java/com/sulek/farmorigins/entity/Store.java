@@ -44,11 +44,11 @@ public class Store extends BaseEntity {
     @Column(name = "email_activision")
     private Boolean emailActivision;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User userId;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "store_id")
     private List<Product> products;
 
