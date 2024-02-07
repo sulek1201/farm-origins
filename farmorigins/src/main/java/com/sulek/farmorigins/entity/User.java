@@ -34,7 +34,7 @@ public class User extends BaseEntity {
     @Column(name = "email", length = 100, unique = true)
     private String email;
 
-    @Column(name = "user_role", length = 100, unique = true)
+    @Column(name = "user_role", length = 100)
     private Integer userRole;
 
     @Column(name = "email_activision", length = 200)
