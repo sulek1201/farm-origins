@@ -41,4 +41,9 @@ public class Product extends BaseEntity {
     @Column(name = "unit_type_id") //ToDo unit type parametrik yap
     private Long unitTypeId;
 
+    @ManyToOne
+    @JoinColumn(name = "store_id")
+    private Store store;
+
+
 }
