@@ -39,7 +39,7 @@ public class StoreController {
         return ResponseEntity.ok(storeService.updateStore(updateStoreRequest));
     }
 
-    @RequestMapping(value = "/update-store/{storeId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete-store/{storeId}", method = RequestMethod.DELETE)
     public ResponseEntity<Boolean> deleteStore(@PathVariable("storeId") Long storeId, @RequestHeader("Authorization") String jwtToken) {
         return ResponseEntity.ok(storeService.deleteStore(storeId));
     }
