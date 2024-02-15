@@ -21,7 +21,7 @@ public class Category extends BaseEntity {
     @SequenceGenerator(name = "category_seq", sequenceName = "S_CATEGORY", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_seq")
     @Column(name = "id", columnDefinition = "numeric(19)")
-    private Long value;
+    private Long id;
 
     @Column(name = "value", length = 200)
     private String label;

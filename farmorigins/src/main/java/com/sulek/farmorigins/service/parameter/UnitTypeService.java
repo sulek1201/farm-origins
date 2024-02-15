@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,8 +23,11 @@ public class UnitTypeService {
     public List<UnitTypeDto> getAllUnitTypes(){
         List<UnitType> unitTypeList = unitTypeRepository.findAll();
 
-        return unitTypeList.stream()
-                .map(unitType -> modelMapper.map(unitType, UnitTypeDto.class))
-                .collect(Collectors.toList());
+        List<UnitTypeDto> unitTypeDtos = new ArrayList<>();
+        for(UnitType unitType : unitTypeList){
+            UnitTypeDto unitTypeDto = new UnitTypeDto(unitType.getId(), unitType.getLabel());
+            unitTypeDtos.add(unitTypeDto);
+        }
+        return unitTypeDtos;
     }
 }

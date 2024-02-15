@@ -18,7 +18,7 @@ public class UnitType extends BaseEntity {
     @SequenceGenerator(name = "unit_type_seq", sequenceName = "S_UNIT_TYPE", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "unit_type_seq")
     @Column(name = "id", columnDefinition = "numeric(19)")
-    private Long value;
+    private Long id;
 
     @Column(name = "value", length = 200)
     private String label;

@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,8 +23,11 @@ public class CategoryService {
     public List<CategoryDto> getAllCategories() {
         List<Category> categoryList = categoryRepository.findAll();
 
-        return categoryList.stream()
-                .map(category -> modelMapper.map(category, CategoryDto.class))
-                .collect(Collectors.toList());
+        List<CategoryDto> categoryDtos = new ArrayList<>();
+        for(Category category : categoryList){
+            CategoryDto categoryDto = new CategoryDto(category.getId(), category.getLabel());
+            categoryDtos.add(categoryDto);
+        }
+        return categoryDtos;
     }
 }
