@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 public class CategoryDto {
 
-    private Long id;
-    private String value;
+    private Long value;
+    private String label;
 
 
 }

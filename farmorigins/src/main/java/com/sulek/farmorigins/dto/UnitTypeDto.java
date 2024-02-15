@@ -9,8 +9,8 @@ import java.math.BigDecimal;
 @Data
 public class UnitTypeDto {
 
-    private Long id;
-    private String value;
+    private Long value;
+    private String label;
 
 
 }
