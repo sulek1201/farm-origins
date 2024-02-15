@@ -25,7 +25,7 @@ public class UnitTypeService {
 
         List<UnitTypeDto> unitTypeDtos = new ArrayList<>();
         for(UnitType unitType : unitTypeList){
-            UnitTypeDto unitTypeDto = new UnitTypeDto(unitType.getId(), unitType.getLabel());
+            UnitTypeDto unitTypeDto = new UnitTypeDto(unitType.getId() -1L, unitType.getLabel());
             unitTypeDtos.add(unitTypeDto);
         }
         return unitTypeDtos;

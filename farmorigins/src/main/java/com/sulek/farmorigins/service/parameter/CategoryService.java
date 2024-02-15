@@ -25,7 +25,7 @@ public class CategoryService {
 
         List<CategoryDto> categoryDtos = new ArrayList<>();
         for(Category category : categoryList){
-            CategoryDto categoryDto = new CategoryDto(category.getId(), category.getLabel());
+            CategoryDto categoryDto = new CategoryDto(category.getId()-1L, category.getLabel());
             categoryDtos.add(categoryDto);
         }
         return categoryDtos;
